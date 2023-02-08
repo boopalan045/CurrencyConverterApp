@@ -43,7 +43,7 @@ class MainViewModel @Inject constructor(
 
         viewModelScope.launch(dispatchers.io){
             _conversion.value = CurrencyEvent.Loading
-            when(val rateResponse = repository.getCurrencyRate(fromCurrency, toCurrency)){
+            when(val rateResponse = repository.getCurrencyRate(toCurrency, fromCurrency)){
                 is Resource.Error ->
                     _conversion.value = CurrencyEvent.Failure(rateResponse.message.toString())
                 is Resource.Success -> {
